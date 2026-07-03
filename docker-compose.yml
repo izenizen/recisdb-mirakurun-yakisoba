@@ -1,0 +1,49 @@
+services:
+  mirakurun:
+    image: mirakurun-custom:latest
+    container_name: mirakurun
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    environment:
+      TZ: Asia/Tokyo
+      DISABLE_PCSCD: "${DISABLE_PCSCD:-0}"
+      DISABLE_B25_TEST: "${DISABLE_B25_TEST:-0}"
+      DOCKER_NETWORK: host
+
+    # チューナーデバイスおよびUSBデバイスのマウント
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+        #      - /dev/px4video0:/dev/px4video0
+        #      - /dev/px4video1:/dev/px4video1
+        #      - /dev/px4video2:/dev/px4video2
+        #      - /dev/px4video3:/dev/px4video3
+        #      - /dev/px4video4:/dev/px4video4
+        #      - /dev/px4video5:/dev/px4video5
+        #      - /dev/px4video6:/dev/px4video6
+        #      - /dev/px4video7:/dev/px4video7
+      - /dev/pxm1urvideo0:/dev/pxm1urvideo0
+    # 設定ファイルとデータの永続化
+    volumes:
+      - ./run:/var/run
+      - ./opt:/opt
+      - ./config:/app-config
+      - ./data:/app-data
+      - /dev:/dev
+
+    network_mode: host
+    cap_add:
+      - SYS_ADMIN
+      - SYS_NICE
+    device_cgroup_rules:
+      - 'c *:* rmw'
+    tmpfs:
+      - /tmp
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-file: "1"
+        max-size: 10m

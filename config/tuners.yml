@@ -1,0 +1,7 @@
+  - name: 'PLEX PX-M1UR #1'
+    types:
+      - GR
+      - BS
+      - CS
+    command: recisdb tune --device /dev/pxm1urvideo0 --channel <channel><satellite>-
+    isDisabled: false
