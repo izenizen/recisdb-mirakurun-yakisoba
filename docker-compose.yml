@@ -13,18 +13,24 @@ services:
       DISABLE_B25_TEST: "${DISABLE_B25_TEST:-0}"
       DOCKER_NETWORK: host
 
-    # チューナーデバイスおよびUSBデバイスのマウント
+    # チューナーデバイスと USB デバイスのマウント
     devices:
+      # USB バス全体をコンテナへ渡す
       - /dev/bus/usb:/dev/bus/usb
-        #      - /dev/px4video0:/dev/px4video0
-        #      - /dev/px4video1:/dev/px4video1
-        #      - /dev/px4video2:/dev/px4video2
-        #      - /dev/px4video3:/dev/px4video3
-        #      - /dev/px4video4:/dev/px4video4
-        #      - /dev/px4video5:/dev/px4video5
-        #      - /dev/px4video6:/dev/px4video6
-        #      - /dev/px4video7:/dev/px4video7
+
+      # 1 台目のチューナー
       - /dev/pxm1urvideo0:/dev/pxm1urvideo0
+
+      # 追加する場合は次のように書く
+      # - /dev/px4video0:/dev/px4video0
+      # - /dev/px4video1:/dev/px4video1
+      # - /dev/px4video2:/dev/px4video2
+      # - /dev/px4video3:/dev/px4video3
+      # - /dev/px4video4:/dev/px4video4
+      # - /dev/px4video5:/dev/px4video5
+      # - /dev/px4video6:/dev/px4video6
+      # - /dev/px4video7:/dev/px4video7
+
     # 設定ファイルとデータの永続化
     volumes:
       - ./run:/var/run
