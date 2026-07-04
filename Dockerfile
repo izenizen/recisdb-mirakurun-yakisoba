@@ -55,13 +55,11 @@ RUN apt-get update && \
         libdvbv5-dev \
         pcsc-tools \
         dvb-tools \
-        wget \
-        && \
+        wget && \
     # 2. recisdb のインストール
     wget https://github.com/kazuki0824/recisdb-rs/releases/download/1.2.4/recisdb_1.2.4-1_amd64.deb && \
     apt-get install -y ./recisdb_1.2.4-1_amd64.deb && \
     rm -f ./recisdb_1.2.4-1_amd64.deb && \
-    # クリーンアップ
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
