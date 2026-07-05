@@ -19,20 +19,14 @@ PX-M1UR 向けに作成した Mirakurun 用の Docker 構成です。
 
 ## 起動方法
 ```bash
-docker compose build
+docker compose build --no-cache
 docker compose up -d
 ```
 
 ## 追加メモ
-- `px4_drv` をインストールする場合は、以下のコマンドでビルド・起動します。
-
-```bash
-sudo docker compose build --no-cache
-sudo docker compose up -d
-```
-
+- `px4_drv` は事前にインストールしてください。
 - `libyakisoba` と `libsobacas` が `recisdb` と一緒に入ります。
-- `config.yml` には、東京地域のチャンネルで GR / BS / CS がすべて含まれる設定例を使います。
+- `config.yml` には、東京地域のチャンネルで GR / BS / CS がすべて含まれていますので、ご自分の地域にはisdbscannerをご利用ください。
 - `bcas_keys` は別途作成してください。フォーマットは次のとおりです。
 
 ```text
