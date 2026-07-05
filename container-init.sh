@@ -52,12 +52,6 @@ if [ -e "/opt/bin/startup" ]; then
   echo "done."
 fi
 
-# only for test purpose
-if [ "$DISABLE_B25_TEST" != "1" ] && !(type "arib-b25-stream-test" > /dev/null 2>&1); then
-  npm --prefix /opt install arib-b25-stream-test
-  ln -sv /opt/node_modules/arib-b25-stream-test/bin/b25 /opt/bin/arib-b25-stream-test
-fi
-
 # pcscd のダイレクトフォアグラウンド起動
 if [ "$DISABLE_PCSCD" != "1" ]; then
   # 残骸ファイルの削除
